@@ -37,7 +37,7 @@ print(f"Greatest Decrease in Profits: {Months[ProfitnLoss.index(min(ProfitnLoss)
 
 with open ("Finacial_Analysist.txt", "w") as text:
     text.write("Financial Analysis\n")
-    text.write("-----------------------------------------------")
+    text.write("-----------------------------------------------\n")
     text.write(f"Total Months: {len(Months)}\n")
     text.write(f"Net Total: ${sum(NetTotal)}\n")
     text.write(f"Average Change: ${int(sum(ProfitnLoss)/(len(ProfitnLoss)))}\n")
