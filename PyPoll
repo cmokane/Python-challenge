@@ -1,1 +1,61 @@
+import os 
+import csv
+
+election_data_csv = os.path.join("Resources","election_data.csv")
+
+Stockham = 0
+DeGette = 0
+Doane = 0
+Ballot = []
+Candidate = []
+
+with open(election_data_csv, 'r') as csvfile:
+
+    csvreader = csv.reader(csvfile, delimiter=',')
+
+    header = next(csvreader)
+
+    for row in csvreader:
+
+        Ballot.append(row[0])
+        Candidate.append(row[2])
+
+    for i in range(len(Candidate)):
+        if  Candidate[i] == "Charles Casper Stockham":
+            Stockham = Stockham + 1
+        elif Candidate[i] == "Diana DeGette":
+            DeGette = DeGette + 1
+        elif Candidate[i] == "Raymon Anthony Doane":
+            Doane = Doane + 1
+
+    if Stockham > DeGette and Stockham > Doane:
+        Winner = "Charles Casper Stockham"
+    elif DeGette > Doane and DeGette > Stockham:
+        Winner = "Diana DeGette"
+    elif Doane > DeGette and Doane > Stockham:
+        Winner = "Raymon Anthony Doane"
+
+
+print("Election Results: ")
+print("---------------------------------------------------")
+print(f"Total Votes: {len(Ballot)}")
+print("---------------------------------------------------")
+print(f"Charles Casper Stokham: {round(((Stockham/len(Ballot))*100),3)}% ({Stockham})")
+print(f"Diana DeGette: {round(((DeGette/len(Ballot))*100),3)}% ({DeGette})")
+print(f"Raymon Anthony Doane: {round(((Doane/len(Ballot))*100),3)}% ({Doane})")
+print("---------------------------------------------------")
+print(f"Winner: {Winner}")
+print("----------------------------------------------------")
+
+with open ("Election_Results.txt", "w") as text:
+    text.write("Election Results\n")
+    text.write("-----------------------------------------------\n")
+    text.write(f"Total Votes: {len(Ballot)}\n")
+    text.write(f"----------------------------------------------\n")
+    text.write(f"Charles Casper Stokham: {round(((Stockham/len(Ballot))*100),3)}% ({Stockham})\n")
+    text.write(f"Diana DeGette: {round(((DeGette/len(Ballot))*100),3)}% ({DeGette})\n")
+    text.write(f"Raymon Anthony Doane: {round(((Doane/len(Ballot))*100),3)}% ({Doane})\n")
+    text.write("-----------------------------------------------\n")
+    text.write(f"Winner: {Winner}\n")
+    text.write(f"----------------------------------------------\n")
 
