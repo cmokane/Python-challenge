@@ -1,1 +1,46 @@
+import os 
+import csv
 
+budget_data_csv = os.path.join("Resources","budget_data.csv")
+
+Months = []
+NetTotal = []
+ProfitnLoss = []
+
+with open(budget_data_csv, 'r') as csvfile:
+
+    csvreader = csv.reader(csvfile, delimiter=',')
+
+    header = next(csvreader)
+
+    for row in csvreader:
+
+        Months.append(row[0])
+        NetTotal.append(int(row[1]))
+
+    for i in range(len(Months)-1):
+        ProfitnLoss.append(int(NetTotal[i+1]-NetTotal[i]))
+
+
+print("Financial Analysis")
+print("-------------------------------------------------")
+
+print(f"Total Months: {len(Months)}")
+
+print(f"Net Toal: ${sum(NetTotal)}")
+
+print(f"Average Change: ${int(sum(ProfitnLoss)/(len(ProfitnLoss)))}")
+
+print(f"Greatest Increase in Profits: {Months[ProfitnLoss.index(max(ProfitnLoss))+1]} (${max(ProfitnLoss)})")
+
+print(f"Greatest Decrease in Profits: {Months[ProfitnLoss.index(min(ProfitnLoss))+1]} (${min(ProfitnLoss)})")
+
+with open ("Finacial_Analysist.txt", "w") as text:
+    text.write("Financial Analysis\n")
+    text.write("-----------------------------------------------")
+    text.write(f"Total Months: {len(Months)}\n")
+    text.write(f"Net Total: ${sum(NetTotal)}\n")
+    text.write(f"Average Change: ${int(sum(ProfitnLoss)/(len(ProfitnLoss)))}\n")
+    text.write(f"Greatest Increase in Profits: {Months[ProfitnLoss.index(max(ProfitnLoss))+1]} (${max(ProfitnLoss)})\n")
+    text.write(f"Greatest Decrease in Profits: {Months[ProfitnLoss.index(min(ProfitnLoss))+1]} (${min(ProfitnLoss)})\n")
+    
